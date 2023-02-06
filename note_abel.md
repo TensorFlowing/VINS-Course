@@ -9,7 +9,6 @@ Tested on Legion PC, ubuntu20
 2. opencv
     v3.4.5 works, v4 not working
     Install OpenCV 3.4.5
-    In CMakeLists.txt, "SET("OpenCV_DIR" "/home/abel/Documents/Software/opencv")"
 3. Eigen
 4. Ceres: vins 初始化部分使用了 ceres 做 sfm，所以我们还是需要依赖 ceres. 
     Download an older version (https://ceres-solver.googlesource.com/ceres-solver/+archive/facb199f3eda902360f9e1d5271372b7e54febe1.tar.gz)
@@ -21,7 +20,7 @@ Tested on Legion PC, ubuntu20
 mkdir vins_course
 cd vins_course
 git clone https://github.com/HeYijia/VINS-Course
-sed -i 's/++11/++14/g' CMakeLists.txt
+Revise CMakeLists.txt to the updated one
 mkdir build 
 cd build
 cmake ..
