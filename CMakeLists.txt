@@ -2,19 +2,23 @@ cmake_minimum_required(VERSION 2.8.3)
 project(vins_estimator)
 
 set(CMAKE_BUILD_TYPE "Release")
-set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_FLAGS "-std=c++14")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
-find_package(Eigen3 REQUIRED)
+# Ceres related
 find_package(Ceres REQUIRED)
-find_package(Pangolin REQUIRED)
-find_package(OpenCV REQUIRED)
-find_package(Boost REQUIRED COMPONENTS filesystem program_options system)
 
-
+# OpenCV related
+find_package(OpenCV 3.4 REQUIRED)
+SET(OpenCV_INCLUDE_DIRS "/usr/local/include/opencv2")
+INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
 message(WARNING "OpenCV_VERSION: ${OpenCV_VERSION}")
+
+find_package(Eigen3 REQUIRED)
+find_package(Pangolin REQUIRED)
+find_package(Boost REQUIRED COMPONENTS filesystem program_options system)
 
 include_directories(
   ${PROJECT_SOURCE_DIR}/include
@@ -42,7 +46,6 @@ add_library(camera_model SHARED
     src/camera_models/gpl/EigenQuaternionParameterization.cc)
 
 target_link_libraries(camera_model ${Boost_LIBRARIES} ${OpenCV_LIBS} ${CERES_LIBRARIES})
-
 
 ADD_LIBRARY(MyVio SHARED
     src/System.cpp

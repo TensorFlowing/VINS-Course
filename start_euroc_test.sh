@@ -1,0 +1,1 @@
+./bin/run_euroc /media/abel/Seagate/s_slam/bak_11Nov22/a_VINS_Mono/Data/MH_05/mav0/ ./config/

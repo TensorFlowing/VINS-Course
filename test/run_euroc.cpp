@@ -7,9 +7,14 @@
 #include <thread>
 #include <iomanip>
 
-#include <cv.h>
+
+#include <opencv2/core.hpp>
 #include <opencv2/opencv.hpp>
-#include <highgui.h>
+#include <opencv2/highgui.hpp>
+#include <opencv2/highgui/highgui_c.h>
+#include "opencv2/imgproc.hpp"
+
+
 #include <eigen3/Eigen/Dense>
 #include "System.h"
 
@@ -18,7 +23,7 @@ using namespace cv;
 using namespace Eigen;
 
 const int nDelayTimes = 2;
-string sData_path = "/home/dataset/EuRoC/MH-05/mav0/";
+string sData_path = "/media/abel/Seagate/s_slam/bak_11Nov22/a_VINS_Mono/Data/MH_05/mav0/";
 string sConfig_path = "../config/";
 
 std::shared_ptr<System> pSystem;
@@ -149,6 +154,9 @@ void DrawIMGandGLinMainThrd(){
 
 int main(int argc, char **argv)
 {
+
+	// Abel
+	// ./bin/run_euroc /media/abel/Seagate/s_slam/bak_11Nov22/a_VINS_Mono/Data/MH_05/mav0/ ./config/
 	if(argc != 3)
 	{
 		cerr << "./run_euroc PATH_TO_FOLDER/MH-05/mav0 PATH_TO_CONFIG/config \n" 
@@ -162,7 +170,7 @@ int main(int argc, char **argv)
 	
 	std::thread thd_BackEnd(&System::ProcessBackEnd, pSystem);
 		
-	// sleep(5);
+	// sleep(5); 
 	std::thread thd_PubImuData(PubImuData);
 
 	std::thread thd_PubImageData(PubImageData);
